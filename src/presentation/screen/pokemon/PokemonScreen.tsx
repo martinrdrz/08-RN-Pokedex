@@ -2,12 +2,12 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {FlatList, Image, ScrollView, StyleSheet, View} from 'react-native';
 import {RootStackParams} from '../../navigator/StackNavigator';
 import {useQuery} from '@tanstack/react-query';
+import {FullScreenLoader} from '../../components/ui/FullScreenLoader';
 import {Chip, Text} from 'react-native-paper';
 import {FadeInImage} from '../../components/ui/FadeInImage';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {Formatter} from '../../../config/helper/formatter';
-import {FullScreenLoader} from '../../components/ui/FullScreenLoader';
 import {getPokemonById} from '../../../actions/pokemons/get-pokemon-by-id';
+import {Formatter} from '../../../config/helper/formatter';
 
 interface Props extends StackScreenProps<RootStackParams, 'PokemonScreen'> {}
 
@@ -56,7 +56,7 @@ export const PokemonScreen = ({navigation, route}: Props) => {
             key={type}
             mode="outlined"
             selectedColor="white"
-            style={{marginLeft: 10}}>
+            style={{marginLeft: 10, backgroundColor: pokemon.color}}>
             {type}
           </Chip>
         ))}
@@ -89,7 +89,11 @@ export const PokemonScreen = ({navigation, route}: Props) => {
         keyExtractor={item => item}
         showsHorizontalScrollIndicator={false}
         renderItem={({item}) => (
-          <Chip selectedColor="white">{Formatter.capitalize(item)}</Chip>
+          <View style={styles.statsContainer}>
+            <Text style={{flex: 1, color: 'white'}}>
+              {Formatter.capitalize(item)}
+            </Text>
+          </View>
         )}
       />
 
@@ -137,7 +141,11 @@ export const PokemonScreen = ({navigation, route}: Props) => {
         showsHorizontalScrollIndicator={false}
         centerContent
         renderItem={({item}) => (
-          <Chip selectedColor="white">{Formatter.capitalize(item)}</Chip>
+          <View style={styles.statsContainer}>
+            <Text style={{flex: 1, color: 'white'}}>
+              {Formatter.capitalize(item)}
+            </Text>
+          </View>
         )}
       />
 

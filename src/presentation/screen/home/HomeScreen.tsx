@@ -1,7 +1,7 @@
 import {StyleSheet, View} from 'react-native';
-import {ActivityIndicator, Button, Text} from 'react-native-paper';
+import {Text} from 'react-native-paper';
 import {getPokemons} from '../../../actions/pokemons/get-pokemons';
-import {QueryClient, useInfiniteQuery, useQuery} from '@tanstack/react-query';
+import {useInfiniteQuery} from '@tanstack/react-query';
 import {PokeballBg} from '../../components/ui/PokeballBg';
 import {FlatList} from 'react-native-gesture-handler';
 import React from 'react';
@@ -45,7 +45,7 @@ export const HomeScreen = () => {
         style={{paddingTop: top + 20}}
         ListHeaderComponent={() => <Text variant="displayMedium">Pokédex</Text>}
         renderItem={({item}) => <PokemonCard pokemon={item} />}
-        onEndReachedThreshold={0.6}
+        onEndReachedThreshold={0.5}
         onEndReached={() => fetchNextPage()}
         showsVerticalScrollIndicator={false}
       />
